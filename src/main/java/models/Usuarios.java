@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CadastroUsuarios extends EntityID {
+public class Usuarios extends EntityID {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
