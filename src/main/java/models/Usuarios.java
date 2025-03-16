@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Usuarios extends EntityID {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column
     private int id;
     @Column

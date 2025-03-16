@@ -9,7 +9,7 @@ import lombok.Setter;
 @MappedSuperclass
 public class EntityID {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
 
     private Long id;
