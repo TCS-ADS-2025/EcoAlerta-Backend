@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Mensagem {
+public class Mensagem extends EntityID{
 
     private Usuarios usuarios;
 

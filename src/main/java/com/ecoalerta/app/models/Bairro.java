@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bairro {
+public class Bairro extends EntityID{
 
     @Column
     private String nomeBairro;
