@@ -1,8 +1,7 @@
 package com.ecoalerta.app.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import com.ecoalerta.app.models.enums.DiaSemana;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Cronograma extends EntityID{
 
-    @Column
-    private String diaSemana;
+    @Enumerated(EnumType.STRING)
+    private DiaSemana diaSemana;
 
     @OneToMany(mappedBy = "cronograma", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bairro> bairros = new ArrayList<>();
