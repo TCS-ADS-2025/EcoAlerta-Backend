@@ -1,13 +1,16 @@
 package com.ecoalerta.app.models;
 
 import com.ecoalerta.app.models.enums.Coleta;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "Bairros")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,9 +22,11 @@ public class Bairro extends EntityID{
 
     @ManyToOne
     @JoinColumn(name = "cronograma_id", nullable = false)
+    @JsonBackReference
     private Cronograma cronograma;
 
-    @Column
+    @NotBlank(message = "Nome do Bairro é um campo obrigatório!")
+    @Column(name = "nome_bairro", nullable = false)
     private String nomeBairro;
 
     @Enumerated(EnumType.STRING)
