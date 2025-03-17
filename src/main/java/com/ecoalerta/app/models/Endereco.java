@@ -16,7 +16,7 @@ public class Endereco extends EntityID{
     private Bairro bairro;
 
     @OneToOne(mappedBy = "endereco")
-    private Usuarios usuarios;
+    private Usuario usuario;
 
     @Column
     private String cep;

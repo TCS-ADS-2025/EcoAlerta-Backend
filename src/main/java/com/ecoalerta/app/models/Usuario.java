@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuarios extends EntityID {
+public class Usuario extends EntityID {
 
     @Column
     private String nomeCompleto;

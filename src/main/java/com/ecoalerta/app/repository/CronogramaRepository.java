@@ -2,6 +2,10 @@ package com.ecoalerta.app.repository;
 
 import com.ecoalerta.app.models.Cronograma;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CronogramaRepository extends JpaRepository<Cronograma, Integer> {
+import java.util.UUID;
+
+@Repository
+public interface CronogramaRepository extends JpaRepository<Cronograma, UUID> {
 }

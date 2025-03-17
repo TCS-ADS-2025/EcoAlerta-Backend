@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Mensagem extends EntityID{
 
-    private Usuarios usuarios;
+    private Usuario usuario;
 
     private Status status;
 
