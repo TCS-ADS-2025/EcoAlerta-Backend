@@ -1,4 +1,4 @@
-package models;
+package com.ecoalerta.app.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

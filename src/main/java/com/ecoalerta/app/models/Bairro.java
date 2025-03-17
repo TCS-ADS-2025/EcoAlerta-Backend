@@ -1,10 +1,7 @@
-package models;
+package com.ecoalerta.app.models;
 
-import enums.Coleta;
+import com.ecoalerta.app.enums.Coleta;
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
