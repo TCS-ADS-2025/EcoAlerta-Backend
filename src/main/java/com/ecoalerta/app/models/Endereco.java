@@ -13,6 +13,7 @@ import lombok.Setter;
 public class Endereco extends EntityID{
 
     @OneToOne
+    @JoinColumn(name = "bairro_id", referencedColumnName = "id")
     private Bairro bairro;
 
     @OneToOne(mappedBy = "endereco")

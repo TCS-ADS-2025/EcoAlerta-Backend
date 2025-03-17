@@ -1,13 +1,13 @@
 package com.ecoalerta.app.models;
 
 import com.ecoalerta.app.models.enums.Status;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,6 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Mensagem extends EntityID{
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @Enumerated(EnumType.STRING)
@@ -28,4 +30,7 @@ public class Mensagem extends EntityID{
 
     @Column
     private String mensagem;
+
+    @Column
+    private LocalDateTime dataHora;
 }

@@ -1,9 +1,7 @@
 package com.ecoalerta.app.models;
 
 import com.ecoalerta.app.models.enums.Coleta;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bairro extends EntityID{
+
+    @OneToOne(mappedBy = "bairro", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Endereco endereco;
+
+    @ManyToOne
+    @JoinColumn(name = "cronograma_id", nullable = false)
+    private Cronograma cronograma;
 
     @Column
     private String nomeBairro;
