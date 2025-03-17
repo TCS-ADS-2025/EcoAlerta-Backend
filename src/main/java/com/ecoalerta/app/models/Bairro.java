@@ -1,6 +1,6 @@
 package com.ecoalerta.app.models;
 
-import com.ecoalerta.app.enums.Coleta;
+import com.ecoalerta.app.models.enums.Coleta;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

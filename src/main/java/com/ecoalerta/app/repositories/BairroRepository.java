@@ -1,4 +1,4 @@
-package com.ecoalerta.app.repository;
+package com.ecoalerta.app.repositories;
 
 import com.ecoalerta.app.models.Bairro;
 import org.springframework.data.jpa.repository.JpaRepository;
