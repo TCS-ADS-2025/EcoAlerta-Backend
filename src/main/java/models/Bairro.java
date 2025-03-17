@@ -5,34 +5,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bairro {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private int id;
 
     @Column
     private String nomeBairro;
 
     private Coleta coleta;
-
-    public Bairro(int id, String nomeBairro, Coleta coleta) {
-        this.id = id;
-        this.nomeBairro = nomeBairro;
-        this.coleta = coleta;
-    }
-
-    @Override
-    public String toString() {
-        return "Bairro{" +
-                "id=" + id +
-                ", nomeBairro='" + nomeBairro + '\'' +
-                ", coleta=" + coleta +
-                '}';
-    }
 }
