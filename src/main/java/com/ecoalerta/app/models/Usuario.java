@@ -1,5 +1,6 @@
 package com.ecoalerta.app.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -23,6 +24,7 @@ public class Usuario extends EntityID {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    @JsonIgnore
     private Endereco endereco;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -43,4 +45,12 @@ public class Usuario extends EntityID {
     @Size(min = 8, message = "A senha deve conter no mínimo 8 caractéres!")
     @Column(nullable = false)
     private String senha;
+
+    public Usuario(String nomeCompleto, Endereco endereco, String email, String senha) {
+        super();
+        this.nomeCompleto = nomeCompleto;
+        this.endereco = endereco;
+        this.email = email;
+        this.senha = senha;
+    }
 }
