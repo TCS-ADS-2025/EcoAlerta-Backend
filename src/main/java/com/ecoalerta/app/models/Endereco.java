@@ -39,7 +39,7 @@ public class Endereco extends EntityID{
 
     @Size(max = 10)
     @Column(nullable = true)
-    private Integer numero;
+    private String numero;
 
     @Size(max = 100)
     @Column(nullable = true)
