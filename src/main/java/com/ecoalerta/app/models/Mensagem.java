@@ -44,4 +44,8 @@ public class Mensagem extends EntityID{
 
     @Column(name = "data_hora")
     private LocalDateTime dataHora;
+    public Mensagem(String titulo, String destinatario, String mensagem, Usuario usuario) {
+        super();
+    }
 }
+
