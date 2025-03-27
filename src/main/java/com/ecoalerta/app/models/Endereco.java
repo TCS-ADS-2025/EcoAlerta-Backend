@@ -1,8 +1,8 @@
 package com.ecoalerta.app.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,32 +16,30 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Endereco extends EntityID{
 
-    @OneToOne
-    @JoinColumn(name = "bairro_id", referencedColumnName = "id")
-    private Bairro bairro;
-
-    @OneToOne(mappedBy = "endereco")
-    private Usuario usuario;
-
-    @NotBlank(message = "CEP é um campo obrigatório!")
-    @Size(min = 8, max = 8)
     @Column(nullable = false)
     private String cep;
 
-    @NotBlank(message = "Cidade é um campo obrigatório!")
-    @Size(min = 3, max = 50)
-    @Column(nullable = false)
-    private String cidade;
-
-    @NotBlank(message = "Logradouro é um campo obrigatório!")
-    @Column(nullable = false)
+    @Column()
     private String logradouro;
 
-    @Size(max = 10)
-    @Column(nullable = true)
+    @Column
+    private String localidade;
+
+    @Column
     private String numero;
 
-    @Size(max = 100)
-    @Column(nullable = true)
+    @Column
     private String complemento;
+
+    @Column
+    private String uf;
+
+    @OneToOne(mappedBy = "endereco")
+    @JsonBackReference
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "bairro_id", referencedColumnName = "id")
+    @JsonManagedReference
+    private Bairro bairro;
 }
