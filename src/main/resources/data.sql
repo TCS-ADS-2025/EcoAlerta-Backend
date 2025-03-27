@@ -1,4 +1,4 @@
-INSERT INTO bairro (id, nome_bairro) VALUES
+INSERT INTO bairros (id, nome_bairro) VALUES
 (gen_random_uuid(),'Ana Maria'),
 (gen_random_uuid(),'Archimedes Naspolini'),
 (gen_random_uuid(),'Área Rual de Criciúma'),
