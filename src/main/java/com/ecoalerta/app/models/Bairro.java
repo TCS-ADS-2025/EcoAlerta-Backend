@@ -1,13 +1,15 @@
 package com.ecoalerta.app.models;
 
-import com.ecoalerta.app.models.enums.Coleta;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Bairros")
@@ -17,18 +19,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Bairro extends EntityID{
 
-    @OneToOne(mappedBy = "bairro", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Endereco endereco;
-
-    @ManyToOne
-    @JoinColumn(name = "cronograma_id", nullable = false)
-    @JsonBackReference
-    private Cronograma cronograma;
-
-    @NotBlank(message = "Nome do Bairro é um campo obrigatório!")
-    @Column(name = "nome_bairro", nullable = false)
+    @Column(nullable = false)
     private String nomeBairro;
 
-    @Enumerated(EnumType.STRING)
-    private Coleta coleta;
+    @OneToMany(mappedBy = "bairro", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "cronograma_id", referencedColumnName = "id")
+    @JsonManagedReference
+    private Cronograma cronograma;
 }
