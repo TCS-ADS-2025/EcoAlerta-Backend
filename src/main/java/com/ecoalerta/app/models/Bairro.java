@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Bairro extends EntityID{
 
-    @Column(nullable = false)
+    @Column(name = "nome_bairro",nullable = false)
     private String nomeBairro;
 
     @OneToMany(mappedBy = "bairro", cascade = CascadeType.ALL, orphanRemoval = true)
