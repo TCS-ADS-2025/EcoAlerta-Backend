@@ -1,6 +1,8 @@
 package com.ecoalerta.app.controllers;
 
+import com.ecoalerta.app.dto.cronograma.CronogramaRequestDTO;
 import com.ecoalerta.app.dto.cronograma.CronogramaResponseDTO;
+import com.ecoalerta.app.services.CronogramaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ public class CronogramaController {
     private final CronogramaService service;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> criar (@RequestBody @Valid CronogragramaRequestDTO request) {
+    public ResponseEntity<String> criar (@RequestBody @Valid CronogramaRequestDTO request) {
         CronogramaResponseDTO response = service.criar(request);
         return ResponseEntity.ok("Cronograma cadastrado com sucesso!");
     }
