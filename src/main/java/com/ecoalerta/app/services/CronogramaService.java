@@ -29,7 +29,7 @@ public class CronogramaService {
 
         Cronograma salvo = cronogramaRepository.save(cronograma);
 
-        return CronogramaResponseDTO.fromEntity(cronograma);
+        return CronogramaResponseDTO.fromEntity(sallvo);
     }
 
     public List<CronogramaResponseDTO> listarTodos(){
