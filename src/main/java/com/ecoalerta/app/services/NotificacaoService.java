@@ -1,5 +1,6 @@
 package com.ecoalerta.app.services;
 
+import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Cronograma;
 import com.ecoalerta.app.models.Mensagem;
@@ -53,6 +54,7 @@ public class NotificacaoService {
                     status = true;
                 } catch (Exception e) {
                     status = false;
+                    throw new EmailNaoEnviadoException();
                 }
 
                 mensagens.add(new Mensagem(status, titulo, usuario.getEmail(), mensagemTexto, LocalDateTime.now(), usuario));

@@ -1,5 +1,6 @@
 package com.ecoalerta.app.services;
 
+import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ public class EmailService {
             return "E-mail Enviado!";
         }
         catch (Exception e) {
-            return "Erro ao tentar enviar o e-mail" + e.getLocalizedMessage();
+            throw new EmailNaoEnviadoException();
         }
     }
 }

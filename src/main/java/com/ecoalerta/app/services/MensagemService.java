@@ -2,7 +2,6 @@ package com.ecoalerta.app.services;
 
 import com.ecoalerta.app.dto.mensagem.MensagemRequestDTO;
 import com.ecoalerta.app.dto.mensagem.MensagemResponseDTO;
-import com.ecoalerta.app.infra.exceptions.UsuarioSemMensagemException;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.models.Usuario;
 import com.ecoalerta.app.repositories.MensagemRepository;
@@ -49,12 +48,6 @@ public class MensagemService {
     }
 
     public List<MensagemResponseDTO> listarPorUsuario(UUID usuarioId) {
-        List<Mensagem> mensagens = mensagemRepository.findByUsuarioId(usuarioId);
-
-        if (mensagens.isEmpty()) {
-            throw new UsuarioSemMensagemException();
-        }
-
         return mensagemRepository.findByUsuarioId(usuarioId)
                 .stream()
                 .map(MensagemResponseDTO::fromEntity)

@@ -2,6 +2,7 @@ package com.ecoalerta.app.services;
 
 import com.ecoalerta.app.dto.usuario.UsuarioRequestDTO;
 import com.ecoalerta.app.dto.usuario.UsuarioResponseDTO;
+import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import com.ecoalerta.app.models.Endereco;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.models.Usuario;
@@ -49,6 +50,7 @@ public class UsuarioService {
             status = true;
         } catch (Exception e) {
             status = false;
+            throw new EmailNaoEnviadoException();
         }
 
         Mensagem mensagem = new Mensagem(
@@ -58,8 +60,8 @@ public class UsuarioService {
                 mensagemTexto,
                 LocalDateTime
                         .parse(LocalDateTime.now()
-                                .format(DateTimeFormatter
-                                        .ofPattern("yyyy-MM-dd'T'HH:mm:ss"))),
+                        .format(DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd'T'HH:mm:ss"))),
                 usuario
         );
         mensagemRepository.save(mensagem);
