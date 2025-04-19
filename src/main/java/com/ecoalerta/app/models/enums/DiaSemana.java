@@ -12,7 +12,7 @@ public enum DiaSemana {
     SABADO,
     DOMINGO;
 
-    public static DiaSemana fromDayofWeek(DayOfWeek dayOfWeek) {
+    public static DiaSemana fromDayOfWeek(DayOfWeek dayOfWeek) {
         return switch (dayOfWeek) {
             case MONDAY -> SEGUNDA;
             case TUESDAY -> TERCA;

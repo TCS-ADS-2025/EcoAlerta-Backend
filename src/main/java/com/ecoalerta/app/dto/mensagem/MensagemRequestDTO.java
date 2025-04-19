@@ -3,9 +3,12 @@ package com.ecoalerta.app.dto.mensagem;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record MensagemRequestDTO (
+public record MensagemRequestDTO(
+
+        Boolean status,
 
         @NotBlank(message = "Título é um campo obrigatório!")
         @Size(max = 50)
@@ -19,6 +22,7 @@ public record MensagemRequestDTO (
         @Size(max = 250)
         String mensagem,
 
+        LocalDateTime dataHora,
+
         UUID usuarioId
-) {
-}
+) { }
