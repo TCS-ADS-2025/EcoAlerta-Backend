@@ -1,5 +1,6 @@
 package com.ecoalerta.app.services;
 
+import com.ecoalerta.app.dto.endereco.EnderecoResponseDTO;
 import com.ecoalerta.app.dto.viacep.ViaCepResponseDTO;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Endereco;
@@ -49,7 +50,10 @@ public class EnderecoService {
         throw new RuntimeException("CEP inválido ou não encontrado!");
     }
 
-    public List<Endereco> listarTodos() {
-        return enderecoRepository.findAll();
+    public List<EnderecoResponseDTO> listarTodos() {
+        return enderecoRepository.findAll()
+                .stream()
+                .map(EnderecoResponseDTO::fromEntity)
+                .toList();
     }
 }

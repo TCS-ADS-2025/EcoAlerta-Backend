@@ -1,5 +1,6 @@
 package com.ecoalerta.app.services;
 
+import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Cronograma;
 import com.ecoalerta.app.models.Mensagem;
@@ -44,7 +45,8 @@ public class NotificacaoService {
                 Bairro bairro = usuario.getEndereco().getBairro();
                 String titulo = "Coleta amanhã!";
                 String mensagemTexto = "Olá " + usuario.getNomeCompleto() +
-                        ", a coleta no seu bairro " + bairro.getNomeBairro() + " está agendada para amanhã.";
+                        ",\n\n A coleta no seu bairro " + bairro.getNomeBairro() +
+                        " está agendada para amanhã." + "\n\nAtenciosamente, Equipe Eco Alerta";
 
                 Boolean status;
 
@@ -53,6 +55,7 @@ public class NotificacaoService {
                     status = true;
                 } catch (Exception e) {
                     status = false;
+                    throw new EmailNaoEnviadoException();
                 }
 
                 mensagens.add(new Mensagem(status, titulo, usuario.getEmail(), mensagemTexto, LocalDateTime.now(), usuario));

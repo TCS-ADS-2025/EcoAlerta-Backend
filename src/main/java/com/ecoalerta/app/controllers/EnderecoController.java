@@ -1,6 +1,6 @@
 package com.ecoalerta.app.controllers;
 
-import com.ecoalerta.app.models.Endereco;
+import com.ecoalerta.app.dto.endereco.EnderecoResponseDTO;
 import com.ecoalerta.app.services.EnderecoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class EnderecoController {
     private final EnderecoService service;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Endereco>> listarTodos() {
-        List<Endereco> response = service.listarTodos();
+    public ResponseEntity<List<EnderecoResponseDTO>> listarTodos() {
+        List<EnderecoResponseDTO> response = service.listarTodos();
         return ResponseEntity.ok(response);
     }
 }
