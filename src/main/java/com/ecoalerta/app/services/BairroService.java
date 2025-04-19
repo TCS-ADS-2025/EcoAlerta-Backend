@@ -19,10 +19,14 @@ public class BairroService {
         return repository.findAll();
     }
 
-    public Bairro buscarPorId(UUID id){
-
+    public Bairro listarPorId(UUID id){
         Bairro bairro = repository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new EntityNotFoundException("Bairro não encontrado"));
+
         return bairro;
+    }
+
+    public List<Bairro> listarPorNome(String nomeBairro) {
+        return repository.findByNomeBairroContainingIgnoreCase(nomeBairro);
     }
 }
