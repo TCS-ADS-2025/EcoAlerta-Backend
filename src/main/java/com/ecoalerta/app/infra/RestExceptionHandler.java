@@ -1,5 +1,6 @@
 package com.ecoalerta.app.infra;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,5 +23,13 @@ public class RestExceptionHandler {
         });
 
         return ResponseEntity.status(status).body(new RestErrorMessage(HttpStatus.valueOf(status.value()), errorMessages));
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    private ResponseEntity<RestErrorMessage> handleEntityNotFound(EntityNotFoundException exception) {
+        var status = HttpStatus.NOT_FOUND;
+        var message = exception.getMessage();
+
+        return ResponseEntity.status(status).body(new RestErrorMessage(status, message));
     }
 }
