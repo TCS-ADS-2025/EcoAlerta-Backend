@@ -11,5 +11,7 @@ import java.util.UUID;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 
+    List<Usuario> findByNomeCompletoContainingIgnoreCase(String nomeCompleto);
+
     List<Usuario> findByEnderecoBairroIn(List<Bairro> bairros);
 }

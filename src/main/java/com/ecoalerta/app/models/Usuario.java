@@ -20,7 +20,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario extends EntityID {
+public class Usuario extends EntityID{
 
     @Column(name = "nome_completo", nullable = false)
     private String nomeCompleto;
@@ -31,20 +31,23 @@ public class Usuario extends EntityID {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    @JsonIgnore
+    @JsonManagedReference
     private Endereco endereco;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Mensagem> mensagens = new ArrayList<>();
 
-    public Usuario(String nomeCompleto, Endereco endereco, String email, String senha) {
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios = new ArrayList<>();
+
+    public Usuario(String nomeCompleto, String email, Endereco endereco, String senha) {
         super();
         this.nomeCompleto = nomeCompleto;
-        this.endereco = endereco;
         this.email = email;
+        this.endereco = endereco;
         this.senha = senha;
     }
 }
