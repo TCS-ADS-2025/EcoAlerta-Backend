@@ -45,7 +45,8 @@ public class NotificacaoService {
                 Bairro bairro = usuario.getEndereco().getBairro();
                 String titulo = "Coleta amanhã!";
                 String mensagemTexto = "Olá " + usuario.getNomeCompleto() +
-                        ", a coleta no seu bairro " + bairro.getNomeBairro() + " está agendada para amanhã.";
+                        ",\n\n A coleta no seu bairro " + bairro.getNomeBairro() +
+                        " está agendada para amanhã." + "\n\nAtenciosamente, Equipe Eco Alerta";
 
                 Boolean status;
 

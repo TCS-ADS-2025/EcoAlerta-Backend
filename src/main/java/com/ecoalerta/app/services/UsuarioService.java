@@ -42,7 +42,7 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
 
         String titulo = "Bem-Vindo";
-        String mensagemTexto = "Olá " + usuario.getNomeCompleto() + ", seja bem-vindo ao sistema Eco Alerta!";
+        String mensagemTexto = "Olá " + usuario.getNomeCompleto() + ", \n\n Seja bem-vindo ao sistema Eco Alerta!";
         Boolean status;
 
         try {
