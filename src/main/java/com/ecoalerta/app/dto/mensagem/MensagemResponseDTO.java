@@ -14,7 +14,8 @@ public record MensagemResponseDTO(
         String destinatario,
         String mensagem,
         LocalDateTime dataHora,
-        Usuario usuario
+        UUID usuarioId,
+        String nomeUsuario
 ) {
 
     public static MensagemResponseDTO fromEntity(Mensagem mensagem){
@@ -25,7 +26,8 @@ public record MensagemResponseDTO(
                 mensagem.getDestinatario(),
                 mensagem.getMensagem(),
                 mensagem.getDataHora(),
-                mensagem.getUsuario()
+                mensagem.getUsuario().getId(),
+                mensagem.getUsuario().getNomeCompleto()
         );
     }
 }

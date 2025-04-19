@@ -11,6 +11,7 @@ public record ComentarioResponseDTO(
         String texto,
         CategoriaComentario categoriaComentario,
         LocalDateTime dataHora,
+        UUID usuarioId,
         String nomeUsuario
 ) {
     public static ComentarioResponseDTO fromEntity(Comentario comentario) {
@@ -19,6 +20,7 @@ public record ComentarioResponseDTO(
                 comentario.getTexto(),
                 comentario.getCategoriaComentario(),
                 comentario.getDataHora(),
+                comentario.getUsuario().getId(),
                 comentario.getUsuario().getNomeCompleto()
         );
     }
