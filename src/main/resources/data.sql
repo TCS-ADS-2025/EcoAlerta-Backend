@@ -99,4 +99,5 @@ INSERT INTO bairros (id, nome_bairro) VALUES
 (gen_random_uuid(),'Vila Selinger'),
 (gen_random_uuid(),'Vila Visconde'),
 (gen_random_uuid(),'Vila Zuleima'),
-(gen_random_uuid(),'Wosocris');
+(gen_random_uuid(),'Wosocris')
+ON CONFLICT (nome_bairro) DO NOTHING;

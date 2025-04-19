@@ -27,7 +27,13 @@ public class BairroController {
 
     @GetMapping("/listar/{id}")
     public ResponseEntity<Bairro> listarPorId(@PathVariable UUID id) {
-        Bairro response = service.buscarPorId(id);
+        Bairro response = service.listarPorId(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/listar/nome/{nome}")
+    public ResponseEntity<List<Bairro>> listarPorNome(@PathVariable("nome") String nomeBairro) {
+        List<Bairro> response = service.listarPorNome(nomeBairro);
         return ResponseEntity.ok(response);
     }
 }

@@ -16,7 +16,7 @@ public record UsuarioRequestDTO(
         @Email
         String email,
 
-        @NotBlank(message = "CEP é um campo obrigatório!")
+        @NotBlank(message = "CEP é obrigatório!")
         @Size(min = 8, max = 9, message = "CEP deve ter 8 caracteres!")
         String cep,
 
@@ -34,5 +34,4 @@ public record UsuarioRequestDTO(
         @NotBlank(message = "Senha é um campo obrigatório!")
         @Size(min = 8, message = "Senha deve ter no mínimo 8 caractéres!")
         String senha
-) {
-}
+) { }

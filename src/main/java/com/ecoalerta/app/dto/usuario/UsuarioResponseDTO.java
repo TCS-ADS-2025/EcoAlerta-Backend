@@ -9,20 +9,20 @@ import java.util.UUID;
 
 public record UsuarioResponseDTO(
 
-     UUID id,
-     String nomeCompleto,
-     String email,
-     Endereco endereco,
-     List<Mensagem> mensagens
-     ) {
+        UUID id,
+        String nomeCompleto,
+        String email,
+        Endereco endereco,
+        List<Mensagem> mensagens
+) {
 
-     public static UsuarioResponseDTO fromEntity(Usuario usuario) {
-         return new UsuarioResponseDTO(
-                 usuario.getId(),
-                 usuario.getNomeCompleto(),
-                 usuario.getEmail(),
-                 usuario.getEndereco(),
-                 usuario.getMensagens()
-         );
-     }
+    public static UsuarioResponseDTO fromEntity(Usuario usuario) {
+        return new UsuarioResponseDTO(
+                usuario.getId(),
+                usuario.getNomeCompleto(),
+                usuario.getEmail(),
+                usuario.getEndereco(),
+                usuario.getMensagens()
+        );
+    }
 }

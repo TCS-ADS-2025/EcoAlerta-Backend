@@ -34,11 +34,11 @@ public class Endereco extends EntityID{
     @Column
     private String uf;
 
-    @OneToOne(mappedBy = "endereco")
+    @OneToOne(mappedBy = "endereco", optional = false)
     @JsonBackReference
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "bairro_id", referencedColumnName = "id")
     @JsonManagedReference
     private Bairro bairro;
