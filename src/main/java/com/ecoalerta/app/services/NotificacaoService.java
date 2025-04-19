@@ -28,10 +28,10 @@ public class NotificacaoService {
     private final MensagemRepository mensagemRepository;
 
     @Transactional
-    @Scheduled(cron = "0 */2 * * * *")
+    @Scheduled(cron = "0 */10 * * * *")
     public void notificaColeta() {
         DayOfWeek amanha = LocalDateTime.now().plusDays(1).getDayOfWeek();
-        DiaSemana diaSemana = DiaSemana.fromDayofWeek(amanha);
+        DiaSemana diaSemana = DiaSemana.fromDayOfWeek(amanha);
 
         List<Cronograma> cronogramas = cronogramaRepository.findByDiaSemana(diaSemana);
         List<Mensagem> mensagens = new ArrayList<>();
@@ -46,7 +46,14 @@ public class NotificacaoService {
                 String mensagemTexto = "Olá " + usuario.getNomeCompleto() +
                         ", a coleta no seu bairro " + bairro.getNomeBairro() + " está agendada para amanhã.";
 
-                Boolean status = Boolean.valueOf(emailService.enviarEmail(usuario.getEmail(), titulo, mensagemTexto));
+                Boolean status;
+
+                try {
+                    emailService.enviarEmail(usuario.getEmail(), titulo, mensagemTexto);
+                    status = true;
+                } catch (Exception e) {
+                    status = false;
+                }
 
                 mensagens.add(new Mensagem(status, titulo, usuario.getEmail(), mensagemTexto, LocalDateTime.now(), usuario));
             }
