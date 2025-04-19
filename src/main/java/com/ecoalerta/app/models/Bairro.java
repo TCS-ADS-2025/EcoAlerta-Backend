@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Bairros")
+@Table(name = "bairros")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bairro extends EntityID{
 
-    @Column(name = "nome_bairro",nullable = false)
+    @Column(name = "nome_bairro", nullable = false, unique = true)
     private String nomeBairro;
 
     @OneToMany(mappedBy = "bairro", cascade = CascadeType.ALL, orphanRemoval = true)
