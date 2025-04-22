@@ -3,6 +3,7 @@ package com.ecoalerta.app.services;
 import com.ecoalerta.app.dto.mensagem.MensagemRequestDTO;
 import com.ecoalerta.app.dto.mensagem.MensagemResponseDTO;
 import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
+import com.ecoalerta.app.infra.exceptions.UsuarioNaoEncontradoException;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.models.Usuario;
@@ -27,8 +28,7 @@ public class MensagemService {
     private final EmailService emailService;
 
     public Mensagem criar(MensagemRequestDTO request) {
-        Usuario usuario = usuarioRepository.findById(request.usuarioId())
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(request.usuarioId()).orElseThrow((UsuarioNaoEncontradoException::new));
 
         Mensagem mensagem = new Mensagem();
         mensagem.setTitulo(request.titulo());

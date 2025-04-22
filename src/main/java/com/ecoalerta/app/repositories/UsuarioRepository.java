@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,4 +15,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByNomeCompletoContainingIgnoreCase(String nomeCompleto);
 
     List<Usuario> findByEnderecoBairroIn(List<Bairro> bairros);
+
+    Optional<Usuario> findByEmail(String email);
 }

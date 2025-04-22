@@ -20,11 +20,11 @@ public class UsuarioController {
 
     private final UsuarioService service;
 
-    @PostMapping(value = "/cadastrar", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> criar(@Valid @RequestBody UsuarioRequestDTO request) {
-        Usuario cadastrado = service.criar(request);
-        return ResponseEntity.ok("Usuário cadastrado com sucesso");
-    }
+//    @PostMapping(value = "/cadastrar", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<String> criar(@Valid @RequestBody UsuarioRequestDTO request) {
+//        Usuario cadastrado = service.criar(request);
+//        return ResponseEntity.ok("Usuário cadastrado com sucesso");
+//    }
 
     @GetMapping("/listar")
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
