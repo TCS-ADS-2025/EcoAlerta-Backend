@@ -6,7 +6,6 @@ import com.ecoalerta.app.models.Usuario;
 import com.ecoalerta.app.services.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +18,6 @@ import java.util.UUID;
 public class UsuarioController {
 
     private final UsuarioService service;
-
-//    @PostMapping(value = "/cadastrar", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> criar(@Valid @RequestBody UsuarioRequestDTO request) {
-//        Usuario cadastrado = service.criar(request);
-//        return ResponseEntity.ok("Usuário cadastrado com sucesso");
-//    }
 
     @GetMapping("/listar")
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {

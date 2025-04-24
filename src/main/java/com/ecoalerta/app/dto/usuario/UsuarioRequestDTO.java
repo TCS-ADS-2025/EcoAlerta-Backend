@@ -1,5 +1,6 @@
 package com.ecoalerta.app.dto.usuario;
 
+import com.ecoalerta.app.models.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -33,5 +34,7 @@ public record UsuarioRequestDTO(
 
         @NotBlank(message = "Senha é um campo obrigatório!")
         @Size(min = 8, message = "Senha deve ter no mínimo 8 caractéres!")
-        String senha
+        String senha,
+
+        Role role
 ) { }

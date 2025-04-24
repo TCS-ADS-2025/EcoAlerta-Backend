@@ -1,6 +1,5 @@
 package com.ecoalerta.app.infra.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +32,30 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.GET, "/bairros/listar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/bairros/listar/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/bairros/listar/nome/{nome}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/comentarios/cadastrar").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET, "/comentarios/listar").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET, "/comentarios/listar/categoria/{categoriaComentario}").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET, "/comentarios/listar/usuario/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/comentarios/excluir/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/cronogramas/cadastrar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar/dia-da-semana/{dia}").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.PUT, "/cronogramas/atualizar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/cronogramas/excluir/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/enderecos/listar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/mensagens/cadastrar/todos-usuarios").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/mensagens/cadastrar/bairros").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/mensagens/listar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/mensagens/listar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/mensagens/listar/usuario/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/listar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/nome/{nome}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("ADMIN")
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
