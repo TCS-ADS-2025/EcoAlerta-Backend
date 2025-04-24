@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cronogramas")
 @Getter
 @Setter
 @NoArgsConstructor

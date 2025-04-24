@@ -1,10 +1,10 @@
 package com.ecoalerta.app.services;
 
+import com.ecoalerta.app.dto.FilaEmail.FilaEmailDTO;
 import com.ecoalerta.app.dto.usuario.LoginRequestDTO;
 import com.ecoalerta.app.dto.usuario.LoginResponseDTO;
 import com.ecoalerta.app.dto.usuario.UsuarioRequestDTO;
 import com.ecoalerta.app.infra.exceptions.EmailCadastradoException;
-import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import com.ecoalerta.app.infra.security.TokenService;
 import com.ecoalerta.app.models.Endereco;
 import com.ecoalerta.app.models.Mensagem;
@@ -72,19 +72,11 @@ public class AuthService {
         repository.save(novoUsuario);
 
         String titulo = "Bem-Vindo";
-        String mensagemTexto = "Olá " + novoUsuario.getNomeCompleto() + ", \n\nSeja bem-vindo ao sistema Eco Alerta!";
-        Boolean status;
-
-        try {
-            emailService.enviarEmail(novoUsuario.getEmail(), titulo, mensagemTexto);
-            status = true;
-        } catch (Exception e) {
-            status = false;
-            throw new EmailNaoEnviadoException();
-        }
+        String mensagemTexto = "Olá " + novoUsuario.getNomeCompleto() +
+                ", \n\nSeja bem-vindo ao sistema Eco Alerta!";
 
         Mensagem mensagem = new Mensagem(
-                status,
+                false,
                 titulo,
                 novoUsuario.getEmail(),
                 mensagemTexto,
@@ -92,6 +84,8 @@ public class AuthService {
                 novoUsuario
         );
         mensagemRepository.save(mensagem);
+
+        emailService.enfileirarEmail(new FilaEmailDTO(mensagem));
 
         String token = tokenService.generateToken(novoUsuario);
         return ResponseEntity.ok(new LoginResponseDTO(token));
