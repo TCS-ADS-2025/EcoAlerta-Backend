@@ -3,6 +3,7 @@ package com.ecoalerta.app.services;
 import com.ecoalerta.app.dto.comentario.ComentarioRequestDTO;
 import com.ecoalerta.app.dto.comentario.ComentarioResponseDTO;
 import com.ecoalerta.app.infra.exceptions.CategoriaSemComentarioException;
+import com.ecoalerta.app.infra.exceptions.UsuarioNaoEncontradoException;
 import com.ecoalerta.app.infra.exceptions.UsuarioSemComentarioException;
 import com.ecoalerta.app.models.Comentario;
 import com.ecoalerta.app.models.Usuario;
@@ -25,8 +26,7 @@ public class ComentarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Comentario criar(ComentarioRequestDTO request) {
-        Usuario usuario = usuarioRepository.findById(request.usuarioId())
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(request.usuarioId()).orElseThrow((UsuarioNaoEncontradoException::new));
 
         Comentario comentario = new Comentario();
         comentario.setTexto(request.texto());

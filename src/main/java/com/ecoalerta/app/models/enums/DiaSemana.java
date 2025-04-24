@@ -4,13 +4,23 @@ import java.time.DayOfWeek;
 
 public enum DiaSemana {
 
-    SEGUNDA,
-    TERCA,
-    QUARTA,
-    QUINTA,
-    SEXTA,
-    SABADO,
-    DOMINGO;
+    SEGUNDA("Segunda"),
+    TERCA("Terça"),
+    QUARTA("Quarta"),
+    QUINTA("Quinta"),
+    SEXTA("Sexta"),
+    SABADO("Sábado"),
+    DOMINGO("Domingo");
+
+    private String dia;
+
+    DiaSemana(String dia) {
+        this.dia = dia;
+    }
+
+    public String getDia() {
+        return dia;
+    }
 
     public static DiaSemana fromDayOfWeek(DayOfWeek dayOfWeek) {
         return switch (dayOfWeek) {
