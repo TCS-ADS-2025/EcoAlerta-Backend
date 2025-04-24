@@ -1,8 +1,7 @@
 package com.ecoalerta.app.services;
 
-import com.ecoalerta.app.dto.mensagem.MensagemRequestDTO;
+import com.ecoalerta.app.dto.FilaEmail.FilaEmailDTO;
 import com.ecoalerta.app.dto.mensagem.MensagemResponseDTO;
-import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.models.Usuario;
@@ -26,19 +25,6 @@ public class MensagemService {
     private final UsuarioRepository usuarioRepository;
     private final EmailService emailService;
 
-    public Mensagem criar(MensagemRequestDTO request) {
-        Usuario usuario = usuarioRepository.findById(request.usuarioId())
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
-
-        Mensagem mensagem = new Mensagem();
-        mensagem.setTitulo(request.titulo());
-        mensagem.setDestinatario(request.destinatario());
-        mensagem.setMensagem(request.mensagem());
-        mensagem.setUsuario(usuario);
-
-        return mensagemRepository.save(mensagem);
-    }
-
     @Transactional
     public void enviarParaTodosUsuarios(String titulo, String corpoMensagem) {
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -48,25 +34,17 @@ public class MensagemService {
             String mensagemTexto = "Olá " + usuario.getNomeCompleto() +
                     ",\n\n" + corpoMensagem + "\n\nAtenciosamente, Equipe Eco Alerta";
 
-            boolean status;
-
-            try {
-                emailService.enviarEmail(usuario.getEmail(), titulo, mensagemTexto);
-                status = true;
-            } catch (Exception e) {
-                status = false;
-                throw new EmailNaoEnviadoException();
-            }
-
             Mensagem mensagem = new Mensagem();
             mensagem.setTitulo(titulo);
             mensagem.setDestinatario(usuario.getEmail());
             mensagem.setMensagem(mensagemTexto);
-            mensagem.setStatus(status);
+            mensagem.setStatus(false);
             mensagem.setDataHora(LocalDateTime.now());
             mensagem.setUsuario(usuario);
 
             mensagens.add(mensagem);
+
+            emailService.enfileirarEmail(new FilaEmailDTO(mensagem));
         }
 
         mensagemRepository.saveAll(mensagens);
@@ -81,25 +59,17 @@ public class MensagemService {
             String mensagemTexto = "Olá " + usuario.getNomeCompleto() +
                     ",\n\n" + corpoMensagem + "\n\nAtenciosamente, Equipe Eco Alerta";
 
-            boolean status;
-
-            try {
-                emailService.enviarEmail(usuario.getEmail(), titulo, mensagemTexto);
-                status = true;
-            } catch (Exception e) {
-                status = false;
-                throw new EmailNaoEnviadoException();
-            }
-
             Mensagem mensagem = new Mensagem();
             mensagem.setTitulo(titulo);
             mensagem.setDestinatario(usuario.getEmail());
             mensagem.setMensagem(mensagemTexto);
-            mensagem.setStatus(status);
+            mensagem.setStatus(false);
             mensagem.setDataHora(LocalDateTime.now());
             mensagem.setUsuario(usuario);
 
             mensagens.add(mensagem);
+
+            emailService.enfileirarEmail(new FilaEmailDTO(mensagem));
         }
 
         mensagemRepository.saveAll(mensagens);

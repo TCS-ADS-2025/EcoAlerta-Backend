@@ -1,6 +1,6 @@
 package com.ecoalerta.app.services;
 
-import com.ecoalerta.app.infra.exceptions.EmailNaoEnviadoException;
+import com.ecoalerta.app.dto.FilaEmail.FilaEmailDTO;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Cronograma;
 import com.ecoalerta.app.models.Mensagem;
@@ -48,17 +48,17 @@ public class NotificacaoService {
                         ",\n\n A coleta no seu bairro " + bairro.getNomeBairro() +
                         " está agendada para amanhã." + "\n\nAtenciosamente, Equipe Eco Alerta";
 
-                Boolean status;
 
-                try {
-                    emailService.enviarEmail(usuario.getEmail(), titulo, mensagemTexto);
-                    status = true;
-                } catch (Exception e) {
-                    status = false;
-                    throw new EmailNaoEnviadoException();
-                }
+                Mensagem mensagem = new Mensagem(
+                        false,
+                        titulo,
+                        usuario.getEmail(),
+                        mensagemTexto,
+                        LocalDateTime.now(),
+                        usuario);
 
-                mensagens.add(new Mensagem(status, titulo, usuario.getEmail(), mensagemTexto, LocalDateTime.now(), usuario));
+                mensagens.add(mensagem);
+                emailService.enfileirarEmail(new FilaEmailDTO(mensagem));
             }
         }
         mensagemRepository.saveAll(mensagens);

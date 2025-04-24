@@ -1,9 +1,8 @@
 package com.ecoalerta.app.controllers;
 
 import com.ecoalerta.app.dto.mensagem.MensagemBairrosRequestDTO;
-import com.ecoalerta.app.dto.mensagem.MensagemTodosUsuariosRequestDTO;
-import com.ecoalerta.app.dto.mensagem.MensagemRequestDTO;
 import com.ecoalerta.app.dto.mensagem.MensagemResponseDTO;
+import com.ecoalerta.app.dto.mensagem.MensagemTodosUsuariosRequestDTO;
 import com.ecoalerta.app.models.Bairro;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.repositories.BairroRepository;
@@ -23,12 +22,6 @@ public class MensagemController {
 
     private final BairroRepository bairroRepository;
     private final MensagemService service;
-
-    @PostMapping("/cadastrar")
-    public ResponseEntity<String> criar(@RequestBody @Valid MensagemRequestDTO request) {
-        Mensagem cadastrada = service.criar(request);
-        return ResponseEntity.ok("Mensagem cadastrada com sucesso!");
-    }
 
     @PostMapping("/cadastrar/todos-usuarios")
     public ResponseEntity<String> enviarParaTodosUsuarios(@Valid @RequestBody MensagemTodosUsuariosRequestDTO request) {
