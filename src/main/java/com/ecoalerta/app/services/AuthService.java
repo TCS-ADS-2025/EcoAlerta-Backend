@@ -5,6 +5,7 @@ import com.ecoalerta.app.dto.usuario.LoginRequestDTO;
 import com.ecoalerta.app.dto.usuario.LoginResponseDTO;
 import com.ecoalerta.app.dto.usuario.UsuarioRequestDTO;
 import com.ecoalerta.app.infra.exceptions.EmailCadastradoException;
+import com.ecoalerta.app.infra.exceptions.UsuarioNaoEncontradoException;
 import com.ecoalerta.app.infra.security.TokenService;
 import com.ecoalerta.app.models.Endereco;
 import com.ecoalerta.app.models.Mensagem;
@@ -35,7 +36,7 @@ public class AuthService {
 
     public ResponseEntity<LoginResponseDTO> login(LoginRequestDTO request) {
         if (this.repository.findByEmail(request.email()) == null) {
-            throw new EmailCadastradoException();
+            throw new UsuarioNaoEncontradoException();
         }
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(request.email(), request.senha());
