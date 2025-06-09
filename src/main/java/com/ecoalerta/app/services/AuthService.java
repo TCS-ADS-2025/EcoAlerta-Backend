@@ -42,9 +42,10 @@ public class AuthService {
         var usernamePassword = new UsernamePasswordAuthenticationToken(request.email(), request.senha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
+        var usuarioAutenticado = (Usuario) auth.getPrincipal();
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token, usuarioAutenticado.getRole()));
     }
 
     @Transactional
@@ -89,6 +90,6 @@ public class AuthService {
         emailService.enfileirarEmail(new FilaEmailDTO(mensagem));
 
         String token = tokenService.generateToken(novoUsuario);
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token, novoUsuario.getRole()));
     }
 }

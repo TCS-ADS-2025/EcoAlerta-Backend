@@ -1,3 +1,5 @@
 package com.ecoalerta.app.dto.usuario;
 
-public record LoginResponseDTO(String token) { }
+import com.ecoalerta.app.models.enums.Role;
+
+public record LoginResponseDTO(String token, Role role) { }
