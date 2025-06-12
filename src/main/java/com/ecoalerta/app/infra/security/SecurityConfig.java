@@ -57,6 +57,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/mensagens/listar/usuario/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/perfil").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/nome/{nome}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("ADMIN")

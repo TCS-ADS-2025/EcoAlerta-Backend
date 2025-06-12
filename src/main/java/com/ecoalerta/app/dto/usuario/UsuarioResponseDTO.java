@@ -1,5 +1,6 @@
 package com.ecoalerta.app.dto.usuario;
 
+import com.ecoalerta.app.dto.endereco.EnderecoResponseDTO;
 import com.ecoalerta.app.models.Endereco;
 import com.ecoalerta.app.models.Mensagem;
 import com.ecoalerta.app.models.Usuario;
@@ -12,7 +13,7 @@ public record UsuarioResponseDTO(
         UUID id,
         String nomeCompleto,
         String email,
-        Endereco endereco,
+        EnderecoResponseDTO endereco,
         List<Mensagem> mensagens
 ) {
 
@@ -21,7 +22,7 @@ public record UsuarioResponseDTO(
                 usuario.getId(),
                 usuario.getNomeCompleto(),
                 usuario.getEmail(),
-                usuario.getEndereco(),
+                EnderecoResponseDTO.fromEntity(usuario.getEndereco()),
                 usuario.getMensagens()
         );
     }

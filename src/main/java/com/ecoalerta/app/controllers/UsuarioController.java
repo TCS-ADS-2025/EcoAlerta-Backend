@@ -7,6 +7,8 @@ import com.ecoalerta.app.services.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +31,12 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponseDTO> listarPorId(@PathVariable UUID id) {
         Usuario response = service.listarPorId(id);
         return ResponseEntity.ok(UsuarioResponseDTO.fromEntity(response));
+    }
+
+    @GetMapping("/perfil")
+    public ResponseEntity<UsuarioResponseDTO> perfil(@AuthenticationPrincipal UserDetails userDetails) {
+        Usuario usuario = service.listarPorEmail(userDetails.getUsername());
+        return ResponseEntity.ok(UsuarioResponseDTO.fromEntity(usuario));
     }
 
     @GetMapping("/listar/nome/{nome}")

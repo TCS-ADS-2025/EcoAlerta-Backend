@@ -9,8 +9,7 @@ public enum DiaSemana {
     QUARTA("Quarta"),
     QUINTA("Quinta"),
     SEXTA("Sexta"),
-    SABADO("Sábado"),
-    DOMINGO("Domingo");
+    SABADO("Sábado");
 
     private String dia;
 
@@ -30,7 +29,7 @@ public enum DiaSemana {
             case THURSDAY -> QUINTA;
             case FRIDAY -> SEXTA;
             case SATURDAY -> SABADO;
-            case SUNDAY -> DOMINGO;
+            case SUNDAY -> null;
         };
     }
 }
