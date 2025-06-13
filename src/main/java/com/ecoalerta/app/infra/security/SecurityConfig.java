@@ -60,7 +60,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/usuarios/perfil").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/nome/{nome}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").hasRole("USUARIO")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("USUARIO")
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

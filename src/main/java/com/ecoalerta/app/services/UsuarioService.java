@@ -57,7 +57,6 @@ public class UsuarioService {
 
         usuario.setNomeCompleto(request.nomeCompleto());
         usuario.setEmail(request.email());
-        usuario.setSenha(request.senha());
         usuario.setEndereco(endereco);
 
         return usuarioRepository.save(usuario);
