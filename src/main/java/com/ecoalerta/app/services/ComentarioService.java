@@ -39,7 +39,7 @@ public class ComentarioService {
     }
 
     public List<ComentarioResponseDTO> listarTodos() {
-        return comentarioRepository.findAll()
+        return comentarioRepository.findAllByOrderByDataHoraDesc()
                 .stream()
                 .map(ComentarioResponseDTO::fromEntity)
                 .toList();
