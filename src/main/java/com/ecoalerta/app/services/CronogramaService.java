@@ -32,6 +32,27 @@ public class CronogramaService {
         return cronogramaRepository.save(cronograma);
     }
 
+    public Cronograma criarOuAtualizar(CronogramaRequestDTO request) {
+        List<Cronograma> existentes = cronogramaRepository.findByDiaSemana(request.diaSemana());
+
+        Cronograma cronograma;
+        if (existentes.isEmpty()) {
+            cronograma = new Cronograma();
+            cronograma.setDiaSemana(request.diaSemana());
+        } else {
+            cronograma = existentes.get(0);
+
+            cronograma.getBairros().forEach(bairro -> bairro.setCronograma(null));
+            cronograma.getBairros().clear();
+        }
+
+        List<Bairro> bairros = bairroRepository.findAllById(request.bairrosIds());
+        bairros.forEach(bairro -> bairro.setCronograma(cronograma));
+        cronograma.getBairros().addAll(bairros);
+
+        return cronogramaRepository.save(cronograma);
+    }
+
     public List<CronogramaResponseDTO> listarTodos(){
         return cronogramaRepository.findAll()
                 .stream()
@@ -59,8 +80,11 @@ public class CronogramaService {
 
         cronograma.getBairros().forEach(bairro -> bairro.setCronograma(null));
 
+        cronograma.getBairros().clear();
+
         List<Bairro> bairros = bairroRepository.findAllById(request.bairrosIds());
         bairros.forEach(bairro -> bairro.setCronograma(cronograma));
+        cronograma.getBairros().addAll(bairros);
 
         return cronogramaRepository.save(cronograma);
     }

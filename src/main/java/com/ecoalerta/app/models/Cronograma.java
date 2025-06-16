@@ -2,7 +2,6 @@ package com.ecoalerta.app.models;
 
 import com.ecoalerta.app.models.enums.DiaSemana;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,10 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Cronograma extends EntityID{
 
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
     private DiaSemana diaSemana;
 
     @OneToMany(mappedBy = "cronograma", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonBackReference
-    private List<Bairro> bairros;
+    @OrderBy("nomeBairro ASC")
+    private List<Bairro> bairros = new ArrayList<>();
 }

@@ -16,7 +16,7 @@ public class BairroService {
     private final BairroRepository repository;
 
     public List<Bairro> listarTodos() {
-        return repository.findAll();
+        return repository.findAllByOrderByNomeBairroAsc();
     }
 
     public Bairro listarPorId(UUID id){

@@ -13,5 +13,8 @@ public interface BairroRepository extends JpaRepository<Bairro, UUID> {
 
     Optional<Bairro> findByNomeBairro(String nomeBairro);
 
+    List<Bairro> findAllByOrderByNomeBairroAsc();
+
+
     List<Bairro> findByNomeBairroContainingIgnoreCase(String nomeBairro);
 }
