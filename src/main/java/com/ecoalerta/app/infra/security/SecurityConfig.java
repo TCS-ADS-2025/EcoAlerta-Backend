@@ -45,8 +45,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/comentarios/listar/usuario/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/comentarios/excluir/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/cronogramas/cadastrar").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar").hasRole("USUARIO")
-                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar/dia-da-semana/{dia}").hasRole("USUARIO")
+                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cronogramas/listar/dia-da-semana/{dia}").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/cronogramas/atualizar/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/cronogramas/excluir/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/enderecos/listar").hasRole("ADMIN")
@@ -57,9 +57,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/mensagens/listar/usuario/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/perfil").hasRole("USUARIO")
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/nome/{nome}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").hasRole("USUARIO")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/excluir/{id}").hasRole("USUARIO")
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

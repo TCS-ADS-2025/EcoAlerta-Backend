@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record ComentarioRequestDTO(
-        UUID usuarioId,
 
         @NotBlank(message = "Texto é um campo obrigatório!")
         @Size(max = 100)

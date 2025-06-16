@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -17,4 +18,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     List<Usuario> findByEnderecoBairroIn(List<Bairro> bairros);
 
     UserDetails findByEmail(String email);
+
+    Optional<Usuario> findUsuarioByEmail(String email);
 }

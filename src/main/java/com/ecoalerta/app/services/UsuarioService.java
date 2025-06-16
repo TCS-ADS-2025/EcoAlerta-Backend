@@ -7,6 +7,7 @@ import com.ecoalerta.app.models.Endereco;
 import com.ecoalerta.app.models.Usuario;
 import com.ecoalerta.app.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,10 @@ public class UsuarioService {
         return usuario;
     }
 
+    public Usuario listarPorEmail(String email) {
+        return usuarioRepository.findUsuarioByEmail(email).orElseThrow((UsuarioNaoEncontradoException::new));
+    }
+
     public List<UsuarioResponseDTO> listarPorNome(String nomeCompleto) {
         return usuarioRepository.findByNomeCompletoContainingIgnoreCase(nomeCompleto)
                 .stream()
@@ -52,7 +57,6 @@ public class UsuarioService {
 
         usuario.setNomeCompleto(request.nomeCompleto());
         usuario.setEmail(request.email());
-        usuario.setSenha(request.senha());
         usuario.setEndereco(endereco);
 
         return usuarioRepository.save(usuario);

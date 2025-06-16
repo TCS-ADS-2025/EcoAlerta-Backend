@@ -12,6 +12,7 @@ import com.ecoalerta.app.repositories.ComentarioRepository;
 import com.ecoalerta.app.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class ComentarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Comentario criar(ComentarioRequestDTO request) {
-        Usuario usuario = usuarioRepository.findById(request.usuarioId()).orElseThrow((UsuarioNaoEncontradoException::new));
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Comentario comentario = new Comentario();
         comentario.setTexto(request.texto());

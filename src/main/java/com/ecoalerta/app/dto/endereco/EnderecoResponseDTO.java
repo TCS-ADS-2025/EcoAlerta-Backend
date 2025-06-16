@@ -9,6 +9,7 @@ public record EnderecoResponseDTO(
         String cep,
         String uf,
         String localidade,
+        UUID bairroId,
         String nomeBairro,
         String logradouro,
         String complemento,
@@ -23,12 +24,13 @@ public record EnderecoResponseDTO(
                 endereco.getCep(),
                 endereco.getUf(),
                 endereco.getLocalidade(),
-                endereco.getBairro().getNomeBairro(),
+                endereco.getBairro() != null ? endereco.getBairro().getId() : null,
+                endereco.getBairro() != null ? endereco.getBairro().getNomeBairro() : null,
                 endereco.getLogradouro(),
                 endereco.getComplemento(),
                 endereco.getNumero(),
-                endereco.getUsuario().getId(),
-                endereco.getUsuario().getNomeCompleto()
+                endereco.getUsuario() != null ? endereco.getUsuario().getId() : null,
+                endereco.getUsuario() != null ? endereco.getUsuario().getNomeCompleto() : null
         );
     }
 }
