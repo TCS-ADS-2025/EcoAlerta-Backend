@@ -12,7 +12,6 @@ INSERT INTO bairros (id, nome_bairro) VALUES
 (gen_random_uuid(),'Cidade Mineira Velha'),
 (gen_random_uuid(),'Cruzeiro do Sul'),
 (gen_random_uuid(),'Dal Pont'),
-(gen_random_uuid(),'Dagostin'),
 (gen_random_uuid(),'Demboski'),
 (gen_random_uuid(),'Estaçãozinha'),
 (gen_random_uuid(),'HG'),

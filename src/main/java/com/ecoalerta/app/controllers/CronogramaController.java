@@ -21,9 +21,9 @@ public class CronogramaController {
     private final CronogramaService service;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> criar(@Valid @RequestBody CronogramaRequestDTO request){
+    public ResponseEntity<CronogramaResponseDTO> criar(@Valid @RequestBody CronogramaRequestDTO request){
         Cronograma cadastrado = service.criar(request);
-        return ResponseEntity.ok("Cronograma cadastrado com sucesso");
+        return ResponseEntity.ok(CronogramaResponseDTO.fromEntity(cadastrado));
     }
 
     @GetMapping("/listar")
