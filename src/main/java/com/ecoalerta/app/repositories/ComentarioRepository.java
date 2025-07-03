@@ -14,4 +14,6 @@ public interface ComentarioRepository extends JpaRepository<Comentario, UUID> {
     List<Comentario> findByCategoriaComentario(CategoriaComentario categoriaComentario);
 
     List<Comentario> findByUsuarioId(UUID usuarioId);
+
+    List<Comentario> findAllByOrderByDataHoraDesc();
 }

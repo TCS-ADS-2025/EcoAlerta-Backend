@@ -50,6 +50,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/cronogramas/atualizar/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/cronogramas/excluir/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/enderecos/listar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/consulta-cep/{cep}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/mensagens/cadastrar/todos-usuarios").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/mensagens/cadastrar/bairros").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/mensagens/listar").hasRole("ADMIN")

@@ -29,7 +29,9 @@ public class NotificacaoService {
     private final MensagemRepository mensagemRepository;
 
     @Transactional
-    @Scheduled(cron = "0 */10 * * * *")
+    @Scheduled(cron = "0 0 7 * * *") // 07:00 da manhã
+    @Scheduled(cron = "0 0 19 * * *") // 19:00 da noite
+    @Scheduled(cron = "0 * * * * *") // A cada minuto, no segundo 0
     public void notificaColeta() {
         DayOfWeek amanha = LocalDateTime.now().plusDays(1).getDayOfWeek();
         DiaSemana diaSemana = DiaSemana.fromDayOfWeek(amanha);
